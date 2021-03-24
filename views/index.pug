@@ -1,22 +1,26 @@
 extends layout.pug
 
 block content 
+  ul 
+    li: a(href="/")
+    li: a(href="/create") 
+    li: a(href="/create-interesting") 
 
-  h2 Existing Users
-    table 
+  table
+    h2 Existing Users
       tr
-       th 
-       th 
-       th 
-       th 
-       th 
-       th 
-       th 
+      th id
+      th First Name
+      th Last Name
+      th Email
+      th Age
+      th Favorite Beatle
+      th Likes Ice Cream
     tbody
-       td 
-       td 
-       td 
-       td 
-       td 
-       td 
-       td 
+      td 
+      td 
+      td 
+      td 
+      td 
+      td 
+      td 
