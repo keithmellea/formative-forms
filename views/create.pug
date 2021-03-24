@@ -1,0 +1,16 @@
+extends layout.pug 
+
+block content 
+    h2 
+        form(action="/create" method="post") 
+            input(type="hidden" name="_csrf" value=csrfToken)
+            label(for="firstname") First Name: 
+            input(type="firstname" id="firstname" name="firstname")
+            label(for="lastname") Last Name: 
+            input(type="lastname" id="lastname" name="lastname")
+            label(for="email") Email: 
+            input(type="email" id="email" name="email")
+            label(for="password") Password: 
+            input(type="password" id="password" name="password")
+            label(for="confirmedpassword") Confirmed Password: 
+            input(type="confirmedpassword" id="confirmedpassword" name="confirmedpassword")

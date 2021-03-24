@@ -9,6 +9,7 @@ app.set("view engine", "pug");
 app.use(cookieParser());
 app.use(express.urlencoded());
 const csrfProtection = csrf({ cookie: true});
+app.use(csrfProtection())
 
 const users = [
   {
@@ -19,9 +20,13 @@ const users = [
   }
 ];
 
-app.get("/", csrfProtection, (req, res) => {
+app.get("/", (req, res) => {
   res.render("index", {users});
 });
+
+app.get("/create", (req, res) => {
+  res.render("create", {title: "create"})
+})
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 module.exports = app;
