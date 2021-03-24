@@ -24,18 +24,18 @@ app.get("/", csrfProtection, (req, res) => {
   res.render("index", {users});
 });
 
-app.get("/create", (req, res) => {
-  res.render("create", {title: "create"})
+app.get("/create", csrfProtection, (req, res) => {
+  res.render("create", {title: "create", csrfToken: req.csrfToken()});
 })
 
 const validateUser = (req, res, next) => {
   const { firstName, lastName, email, password, confirmedPassword } = req.body;
   const errors = [];
   if (!firstName) {
-    errors.push("Please fill out the first name field");
+    errors.push("Please provide a first name.");
   }
   if (!lastName) {
-    errors.push("Please fill out the last name field");
+    errors.push("Please provide a last name.");
   }
   if (!email) {
     errors.push("Please fill out the email field");
@@ -43,7 +43,7 @@ const validateUser = (req, res, next) => {
   if (!password) {
     errors.push("Please fill out the password field");
   }
-  if (!confirmedPasword) {
+  if (!confirmedPassword) {
     errors.push("Please fill out the confirmed password field");
   }
 
@@ -58,13 +58,13 @@ app.post("/create", csrfProtection, validateUser, (req, res) => {
   if (req.errors.length > 0) {
     res.render("create", {
       title: "create",
-      errors,
       email,
       firstName,
       lastName,
       password,
       confirmedPassword,
     });
+      console.log(email, firstName, lastName);
     return;
   }
   const user = {
