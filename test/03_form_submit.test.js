@@ -141,13 +141,13 @@ describe("form-submit", () => {
       expect(lastRowCells.eq(0).text()).to.equal(
         $("tbody tr").length.toString()
       );
-
+console.log(formData);
       // firstName column:
       expect(lastRowCells.eq(1).text()).to.equal(formData.firstName);
 
       // lastName column:
       expect(lastRowCells.eq(2).text()).to.equal(formData.lastName);
-
+      
       // email column:
       expect(lastRowCells.eq(3).text()).to.equal(formData.email);
     });

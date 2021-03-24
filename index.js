@@ -68,6 +68,7 @@ app.post("/create", csrfProtection, validateUser, (req, res) => {
     return;
   }
   const user = {
+    id: users.length + 1,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
