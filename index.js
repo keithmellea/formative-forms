@@ -3,13 +3,13 @@ const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
 const { urlencoded } = require("express");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.set("view engine", "pug");
 app.use(cookieParser());
 app.use(express.urlencoded());
 const csrfProtection = csrf({ cookie: true});
-app.use(csrfProtection())
+// app.use(csrfProtection())
 
 const users = [
   {
