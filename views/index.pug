@@ -1,11 +1,6 @@
 extends layout.pug
 
 block content 
-  ul 
-    li: a(href="/")
-    li: a(href="/create") 
-    li: a(href="/create-interesting") 
-
   table
     h2 Existing Users
       tr
@@ -17,10 +12,11 @@ block content
       th Favorite Beatle
       th Likes Ice Cream
     tbody
-      td 
-      td 
-      td 
-      td 
+     each user in users
+      td= user.id
+      td= user.firstName
+      td= user.lastName 
+      td= user.email 
       td 
       td 
       td 
