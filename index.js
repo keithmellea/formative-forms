@@ -25,7 +25,7 @@ app.get("/", csrfProtection, (req, res) => {
 });
 
 app.get("/create", csrfProtection, (req, res) => {
-  res.render("create", {title: "create", csrfToken: req.csrfToken()});
+  res.render("create", {title: "create", csrfToken: req.csrfToken(), errors: []});
 })
 
 const validateUser = (req, res, next) => {
@@ -38,13 +38,15 @@ const validateUser = (req, res, next) => {
     errors.push("Please provide a last name.");
   }
   if (!email) {
-    errors.push("Please fill out the email field");
+    errors.push("Please provide an email.");
   }
   if (!password) {
-    errors.push("Please fill out the password field");
+    errors.push("Please provide a password.");
   }
-  if (!confirmedPassword) {
-    errors.push("Please fill out the confirmed password field");
+  if (password && password !== confirmedPassword) {
+    errors.push(
+      "The provided values for the password and password confirmation fields did not match."
+    );
   }
 
   req.errors = errors;
@@ -58,13 +60,11 @@ app.post("/create", csrfProtection, validateUser, (req, res) => {
   if (req.errors.length > 0) {
     res.render("create", {
       title: "create",
+      errors: req.errors,
       email,
       firstName,
-      lastName,
-      password,
-      confirmedPassword,
+      lastName
     });
-      console.log(email, firstName, lastName);
     return;
   }
   const user = {
